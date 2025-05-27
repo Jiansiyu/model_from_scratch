@@ -6,6 +6,8 @@ import torch.optim as optim
 from tqdm import tqdm
 from model import build_model
 from utils import load_config, get_dataloader, set_seed
+from datetime import datetime
+
 
 def train_one_epoch(model, loader, criterion, optimier, device):
     model.train()
@@ -63,13 +65,15 @@ def main():
     os.makedirs(cfg['train']['checkpoint_path'], exist_ok=True)
 
     for epoch in range(cfg['train']['epochs']):
+
+        start_time = datetime.now()
         train_loss = train_one_epoch(model, train_loader, criterion, optimizer, device)
         val_loss, val_acc = validate(model, test_loader, criterion, device)
-        print(f'Epoch {epoch+1} - Train loss: {train_loss:.4f} - Val loss: {val_loss:.4f} - Val acc: {val_acc:.4f}')
+        print(f'Epoch {epoch+1} - Train loss: {train_loss:.4f} - Val loss: {val_loss:.4f} - Val acc: {val_acc:.4f} - Time: {datetime.now() - start_time}s')
 
         if val_acc > best_acc:
             best_acc = val_acc
-            torch.save(model.state_dict(), os.path.join(cfg['train']['checkpoint_path'], f'best_model_{epoch}.pth'))
+            torch.save(model.state_dict(), os.path.join(cfg['train']['checkpoint_path'], f'{cfg["model"]["name"].lower()}_best_model.pth'))
     print(f'Best val acc: {best_acc:.4f}')
 
     test_loss, test_acc = validate(model, test_loader, criterion, device)
