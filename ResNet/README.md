@@ -1,4 +1,8 @@
+# Residual Network 
+ 
+## How to train 
 
+before get start, you will need to install nvidia-docker
 ```shell
 
 # Build the Docker image
