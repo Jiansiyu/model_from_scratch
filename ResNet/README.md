@@ -2,7 +2,8 @@
  
 ## How to train 
 
-before get start, you will need to install nvidia-docker
+before get start, you will need to install nvidia-docker if you want to use the full power of GPU 
+
 ```shell
 
 # Build the Docker image
