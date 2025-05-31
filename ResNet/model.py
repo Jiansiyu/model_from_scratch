@@ -164,11 +164,11 @@ def build_model(name:str, num_classes:int, pretrained:bool=False):
     """
 
     if name.lower() == 'resnet18':
-        model = torchvision.models.resnet18(pretrained=pretrained)
+        model = torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
     elif name.lower() == 'resnet34':
-        model  = torchvision.models.resnet34(pretrained=pretrained)
+        model  = torchvision.models.resnet34(weights=torchvision.models.ResNet34_Weights.DEFAULT)
     elif name.lower() == 'resnet50':
-        model = torchvision.models.resnet50(pretrained=pretrained)
+        model = torchvision.models.resnet50(weights=torchvision.models.ResNet50_Weights.DEFAULT)
     else:
         raise ValueError(f'Unknown model name: {name}')
 
